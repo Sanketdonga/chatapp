@@ -19,6 +19,7 @@ import { bgGradient } from "../constants/color";
 import { server } from "../constants/config";
 import { userExists } from "../redux/reducers/auth";
 import { usernameValidator } from "../utils/validators";
+import googleIconUrl from "../assets/google-icon.png";
 
 const Login = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -68,6 +69,11 @@ const Login = () => {
     } finally {
       setIsLoading(false);
     }
+  };
+
+  const loginWithGoogle = () => {
+    // e.preventDefault();
+    window.location.href = `${server}/auth/google`;
   };
 
   const handleSignUp = async (e) => {
@@ -129,7 +135,7 @@ const Login = () => {
         <Paper
           elevation={3}
           sx={{
-            padding: 4,
+            padding: 2,
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
@@ -143,7 +149,6 @@ const Login = () => {
                   width: "100%",
                   marginTop: "1rem",
                 }}
-                onSubmit={handleLogin}
               >
                 <TextField
                   required
@@ -175,21 +180,48 @@ const Login = () => {
                   type="submit"
                   fullWidth
                   disabled={isLoading}
+                  onClick={handleLogin}
                 >
                   Login
                 </Button>
 
-                <Typography textAlign={"center"} m={"1rem"}>
+                <Typography textAlign={"center"} m={"0.5rem"}>
                   OR
                 </Typography>
+
+                <Button
+                  type="button"
+                  variant="outlined"
+                  fullWidth
+                  disabled={isLoading}
+                  onClick={loginWithGoogle}
+                  sx={{
+                    textTransform: "none",
+                    color: "black",
+                    borderColor: "grey.500",
+                  }}
+                  startIcon={
+                    <img
+                      src={googleIconUrl}
+                      alt="google icon"
+                      style={{ width: "20px", height: "20px" }}
+                    />
+                  }
+                >
+                  Login with Google
+                </Button>
 
                 <Button
                   disabled={isLoading}
                   fullWidth
                   variant="text"
                   onClick={toggleLogin}
+                  sx={{ textTransform: "none", mt: "0.5rem" }}
                 >
-                  Sign Up Instead
+                  <Typography component="span">
+                    <span style={{ color: "black" }}>Click here to </span>
+                    <span style={{ color: "blue" }}>SignUp</span>
+                  </Typography>
                 </Button>
               </form>
             </>
@@ -201,7 +233,6 @@ const Login = () => {
                   width: "100%",
                   marginTop: "1rem",
                 }}
-                onSubmit={handleSignUp}
               >
                 <Stack position={"relative"} width={"10rem"} margin={"auto"}>
                   <Avatar
@@ -303,21 +334,48 @@ const Login = () => {
                   type="submit"
                   fullWidth
                   disabled={isLoading}
+                  onClick={handleSignUp}
                 >
                   Sign Up
                 </Button>
 
-                <Typography textAlign={"center"} m={"1rem"}>
+                <Typography textAlign={"center"} sx={{ margin: "0.5rem" }}>
                   OR
                 </Typography>
+
+                <Button
+                  type="button"
+                  variant="outlined"
+                  fullWidth
+                  disabled={isLoading}
+                  onClick={loginWithGoogle}
+                  sx={{
+                    textTransform: "none",
+                    color: "black",
+                    borderColor: "grey.500",
+                  }}
+                  startIcon={
+                    <img
+                      src={googleIconUrl}
+                      alt="google icon"
+                      style={{ width: "20px", height: "20px" }}
+                    />
+                  }
+                >
+                  Sign Up with Google
+                </Button>
 
                 <Button
                   disabled={isLoading}
                   fullWidth
                   variant="text"
                   onClick={toggleLogin}
+                  sx={{ textTransform: "none", mt: "0.5rem" }}
                 >
-                  Login Instead
+                  <Typography component="span">
+                    <span style={{ color: "black" }}>Click here to </span>
+                    <span style={{ color: "blue" }}>login</span>
+                  </Typography>
                 </Button>
               </form>
             </>

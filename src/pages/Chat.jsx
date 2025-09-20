@@ -82,7 +82,7 @@ const Chat = ({ chatId, user }) => {
     typingTimeout.current = setTimeout(() => {
       socket.emit(STOP_TYPING, { members, chatId });
       setIamTyping(false);
-    }, [2000]);
+    }, 2000);
   };
 
   const handleFileOpen = (e) => {
@@ -176,6 +176,8 @@ const Chat = ({ chatId, user }) => {
   useSocketEvents(socket, eventHandler);
 
   useErrors(errors);
+
+  console.log("oldMessages", oldMessages);
 
   const allMessages = [...oldMessages, ...messages];
 
